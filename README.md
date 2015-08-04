@@ -1,15 +1,17 @@
-Java
-----
+cielo24 Java API Library
+========================
 
-* Core jar path:
+* Core JAR path:
 
-    cielo24_Java/cielo24/bin/cielo24.jar *(no dependencies)*
+    cielo24/bin/cielo24.jar  *(no dependencies)*
     
-    Dependent jar can be compiled from source code (3rd party dependencies are in the /lib folder).
-    In Eclipse - click cielo24.jardesc to compile.
+    Dependent JAR can be compiled from source code (3rd party dependencies are in the `/lib` folder).
     
-* Command Line Interface jar path:
+* Command Line Interface JAR path:
 
-    cielo24_Java/cielo24cli/bin/cielo24cli.jar *(no dependencies)*
+    cielo24cli/bin/cielo24cli.jar  *(no dependencies)*
     
     Usage: `java -jar cielo24cli.jar [action] [options]`
+
+
+For a detailed API documentation visit: http://docs.cielo24.com/en/latest/
