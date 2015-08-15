@@ -24,7 +24,7 @@ public abstract class BaseOptions {
      */
     public Hashtable<String, Object> getHashtable() {
         Hashtable<String, Object> queryHashtable = new Hashtable<String, Object>();
-        Field[] fields = this.getClass().getDeclaredFields();
+        Field[] fields = this.getClass().getFields();
         for (Field field : fields) {
             Object value;
             try {

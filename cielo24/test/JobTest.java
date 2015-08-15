@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import cielo24.options.JobListOptions;
 import cielo24.options.PerformTranscriptionOptions;
@@ -41,8 +42,25 @@ public class JobTest extends ActionsTest {
         options.forceCase = Case.UPPER;
         String[] array = new String[] { "build_url=true", "dfxp_header=header" };
         options.populateFromArray(array);
-        // Can only assert length because Hashtable produces different order each time
-        assertEquals("build_url=true&caption_by_sentence=true&dfxp_header=header&force_case=upper".length(), options.toQuery().length());
+
+        Hashtable<String, Object> expected = new Hashtable<String, Object>();
+        expected.put("build_url", Boolean.TRUE);
+        expected.put("caption_by_sentence", Boolean.TRUE);
+        expected.put("dfxp_header", "header");
+        expected.put("force_case", Case.UPPER);
+        assertEquals(expected, options.getHashtable());
+    }
+
+    @Test
+    public void testOptionsInheritance() {
+        TranscriptOptions options = new TranscriptOptions();
+        options.createParagraphs = true;  // Option from the TranscriptOptions class
+        options.maskProfanity = true;     // Option from the CommonOptions class (super class)
+
+        Hashtable<String, Object> expected = new Hashtable<String, Object>();
+        expected.put("create_paragraphs", Boolean.TRUE);
+        expected.put("mask_profanity", Boolean.TRUE);
+        assertEquals(expected, options.getHashtable());
     }
 
     @Test
