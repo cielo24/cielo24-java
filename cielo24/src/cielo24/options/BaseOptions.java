@@ -60,7 +60,7 @@ public abstract class BaseOptions {
 
     /* Sets the property whose QueryName attribute matches the key */
     public void populateFromKeyValuePair(KeyValuePair<String, String> pair) {
-        Field[] fields = this.getClass().getDeclaredFields();
+        Field[] fields = this.getClass().getFields();
         for (Field field : fields) {
             QueryName key = field.getDeclaredAnnotation(QueryName.class);
             Type type = field.getType();
