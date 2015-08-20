@@ -3,7 +3,6 @@
 cielo24/bin/production/
 cielo24/bin/test/
 cielo24cli/bin/production/
-*.MF
 
 # Unnecessary IntelliJ files
 .idea/
