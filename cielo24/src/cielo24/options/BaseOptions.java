@@ -92,7 +92,7 @@ public abstract class BaseOptions {
     /* Converts String into an object */
     protected Object getValueFromString(String str, Type type) {
         // Quotes are necessary in json
-        return Utils.deserialize("\"" + str + "\"", type);
+        return Utils.deserialize(str, type);
     }
 
     /* Converts 'value' into String based on its type. Precondition: value != null */
