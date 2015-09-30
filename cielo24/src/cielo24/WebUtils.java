@@ -97,14 +97,14 @@ public class WebUtils {
 
     /* Reads data (String) from an input stream */
     private String readInputStream(InputStream stream) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-        StringBuffer response = new StringBuffer();
-        String inputLine;
-        while ((inputLine = reader.readLine()) != null) {
-            response.append(inputLine);
+        InputStreamReader reader = new InputStreamReader(stream);
+        int nextChar;
+        String responseString = "";
+        while ((nextChar = reader.read()) != -1) {
+            responseString += (char) nextChar;
         }
         reader.close();
-        return response.toString();
+        return responseString;
     }
 
     /* Logs the URL */
