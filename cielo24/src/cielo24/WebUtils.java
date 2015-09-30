@@ -1,18 +1,15 @@
 package cielo24;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.google.common.base.Charsets;
+import com.google.common.io.CharStreams;
+import com.google.common.io.Closeables;
 
 import cielo24.utils.WebException;
 
@@ -97,14 +94,11 @@ public class WebUtils {
 
     /* Reads data (String) from an input stream */
     private String readInputStream(InputStream stream) throws IOException {
-        InputStreamReader reader = new InputStreamReader(stream);
-        int nextChar;
-        String responseString = "";
-        while ((nextChar = reader.read()) != -1) {
-            responseString += (char) nextChar;
+        try {
+            return CharStreams.toString(new InputStreamReader(stream, Charsets.UTF_8));
+        } finally {
+            Closeables.closeQuietly(stream);
         }
-        reader.close();
-        return responseString;
     }
 
     /* Logs the URL */
