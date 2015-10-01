@@ -140,7 +140,9 @@ public class JobTest extends ActionsTest {
         options.removeSoundsList.add(Tag.BLEEP);
         options.replaceSlang = true;
         options.speakerChangeToken = "^^";
-        this.actions.getTranscript(this.apiToken, this.jobId, options);
+        String transcriptTest = this.actions.getTranscript(this.apiToken, this.jobId, options);
+        // Ensure that line breaks are preserved
+        assertTrue(transcriptTest.contains("\n"));
     }
 
     @Test
@@ -155,7 +157,9 @@ public class JobTest extends ActionsTest {
         options.speakerChangeToken = "^^";
         options.captionBySentence = true;
         options.captionWordsMin = 3;
-        this.actions.getCaption(this.apiToken, this.jobId, CaptionFormat.SRT, options);
+        String captionText = this.actions.getCaption(this.apiToken, this.jobId, CaptionFormat.SRT, options);
+        // Ensure that line breaks are preserved
+        assertTrue(captionText.contains("\n"));
     }
 
     @Test

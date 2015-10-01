@@ -1,18 +1,15 @@
 package cielo24;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.google.common.base.Charsets;
+import com.google.common.io.CharStreams;
+import com.google.common.io.Closeables;
 
 import cielo24.utils.WebException;
 
@@ -27,84 +24,116 @@ public class WebUtils {
         return httpRequest(url, method, timeout, new Hashtable<String, String>());
     }
 
-    public String httpRequest(URL url, HttpMethod method, int timeout, Hashtable<String, String> headers) throws IOException, WebException {
+    public String httpRequest(URL url, HttpMethod method, int timeout, Hashtable<String, String> headers)
+            throws IOException, WebException {
         log(url);
 
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = null;
 
-        if (headers != null) {
-            for (String key : headers.keySet()) {
-                connection.setRequestProperty(key, headers.get(key));
+        try {
+            connection = (HttpURLConnection) url.openConnection();
+
+            if (headers != null) {
+                for (String key : headers.keySet()) {
+                    connection.setRequestProperty(key, headers.get(key));
+                }
             }
-        }
-        connection.setRequestMethod(method.toString());
-        connection.setConnectTimeout(timeout);
-        connection.setReadTimeout(timeout);
-        connection.connect();
+            connection.setRequestMethod(method.toString());
+            connection.setConnectTimeout(timeout);
+            connection.setReadTimeout(timeout);
+            connection.connect();
 
-        return readResponse(connection);
+            return readResponse(connection);
+        } finally {
+            if (connection != null)
+                connection.disconnect();
+        }
     }
 
     /* Used exclusively by updatePassword method */
-    public String httpRequest(URL url, HttpMethod method, int timeout, String requestBody) throws IOException, WebException {
+    public String httpRequest(URL url, HttpMethod method, int timeout, String requestBody)
+            throws IOException, WebException {
         byte[] byteArray = requestBody.getBytes("UTF-8");
-        InputStream inputStream = new ByteArrayInputStream(byteArray);
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-        return uploadData(url, bufferedInputStream, "password", byteArray.length);
+        InputStream inputStream = null;
+
+        try {
+            inputStream = new ByteArrayInputStream(byteArray);
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+            return uploadData(url, bufferedInputStream, "password", byteArray.length);
+        } finally {
+            Closeables.closeQuietly(inputStream);
+        }
     }
 
     /* Uploads data in the body of HTTP request */
-    public String uploadData(URL url, BufferedInputStream inputStream, String contentType, long length) throws IOException, WebException {
+    public String uploadData(URL url, BufferedInputStream inputStream, String contentType, long length)
+            throws IOException, WebException {
         log(url);
 
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod(HttpMethod.POST.toString());
-        connection.setRequestProperty("Content-Type", contentType);
-        connection.setRequestProperty("Content-Length", Long.toString(length));
-        connection.setFixedLengthStreamingMode(length);
-        connection.setDoOutput(true);
-        connection.setDoInput(true);
-        connection.connect();
+        HttpURLConnection connection = null;
 
-        BufferedOutputStream outputStream = new BufferedOutputStream(connection.getOutputStream());
+        try {
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod(HttpMethod.POST.toString());
+            connection.setRequestProperty("Content-Type", contentType);
+            connection.setRequestProperty("Content-Length", Long.toString(length));
+            connection.setFixedLengthStreamingMode(length);
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.connect();
 
-        // Copy contents to output stream
-        byte[] buffer = new byte[1024];
-        int len;
-        while ((len = inputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, len);
+            BufferedOutputStream outputStream = null;
+
+            try {
+                outputStream = new BufferedOutputStream(connection.getOutputStream());
+
+                // Copy contents to output stream
+                byte[] buffer = new byte[1024];
+                int len;
+                while ((len = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, len);
+                }
+                outputStream.flush();
+            } finally {
+                if (outputStream != null)
+                    outputStream.close();
+            }
+            return readResponse(connection);
+
+        } finally {
+            if (connection != null)
+                connection.disconnect();
         }
-        outputStream.flush();
-        outputStream.close();
-
-        return readResponse(connection);
     }
 
     /* Helper method */
     private String readResponse(HttpURLConnection connection) throws IOException, WebException {
         int responseCode = connection.getResponseCode();
         if (responseCode == 200 || responseCode == 204) {
-            String response = readInputStream(connection.getInputStream());
-            connection.disconnect();
-            return response;
+            InputStream inputStream = null;
+            try {
+                inputStream = connection.getInputStream();
+                return readInputStream(inputStream);
+            } finally {
+                Closeables.closeQuietly(inputStream);
+            }
         } else {
-            String response = readInputStream(connection.getErrorStream());
-            HashMap<String, String> map = Utils.deserialize(response, Utils.hashMapType);
-            connection.disconnect();
-            throw new WebException(map.get("ErrorType"), map.get("ErrorComment"));
+            InputStream errorStream = null;
+
+            try {
+                errorStream = connection.getErrorStream();
+                String response = readInputStream(errorStream);
+                HashMap<String, String> map = Utils.deserialize(response, Utils.hashMapType);
+                throw new WebException(map.get("ErrorType"), map.get("ErrorComment"));
+            } finally {
+                Closeables.closeQuietly(errorStream);
+            }
         }
     }
 
     /* Reads data (String) from an input stream */
     private String readInputStream(InputStream stream) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-        StringBuffer response = new StringBuffer();
-        String inputLine;
-        while ((inputLine = reader.readLine()) != null) {
-            response.append(inputLine);
-        }
-        reader.close();
-        return response.toString();
+        return CharStreams.toString(new InputStreamReader(stream, Charsets.UTF_8));
     }
 
     /* Logs the URL */
