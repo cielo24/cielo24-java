@@ -21,6 +21,7 @@ import cielo24.utils.WebException;
 import cielo24.Enums.*;
 
 import javax.time.calendar.LocalDateTime;
+import com.google.common.io.Closeables;
 
 public class Actions {
 
@@ -208,14 +209,20 @@ public class Actions {
     /* Uploads a file from fileStream to job with jobId */
     public Guid addMediaToJob(Guid apiToken, Guid jobId, File file) throws IOException, WebException {
         this.assertArgument(file, "Local Media File");
-        BufferedInputStream stream = new BufferedInputStream(new FileInputStream(file));
+        BufferedInputStream stream = null;
 
-        Hashtable<String, String> queryHashtable = this.initJobReqDict(apiToken, jobId);
-        URL requestURL = Utils.buildURL(serverUrl, ADD_MEDIA_TO_JOB_PATH, queryHashtable);
-        String serverResponse = web.uploadData(requestURL, stream, "video/mp4", file.length());
-        HashMap<String, String> response = Utils.deserialize(serverResponse, Utils.hashMapType);
+        try {
+            stream = new BufferedInputStream(new FileInputStream(file));
 
-        return new Guid(response.get("TaskId"));
+            Hashtable<String, String> queryHashtable = this.initJobReqDict(apiToken, jobId);
+            URL requestURL = Utils.buildURL(serverUrl, ADD_MEDIA_TO_JOB_PATH, queryHashtable);
+            String serverResponse = web.uploadData(requestURL, stream, "video/mp4", file.length());
+            HashMap<String, String> response = Utils.deserialize(serverResponse, Utils.hashMapType);
+
+            return new Guid(response.get("TaskId"));
+        } finally {
+            Closeables.closeQuietly(stream);
+        }
     }
 
     /* Provides job with jobId a URL to media */
