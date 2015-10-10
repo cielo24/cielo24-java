@@ -47,6 +47,7 @@ public class Actions {
     private final static String GET_CAPTION_PATH = "/api/job/get_caption";
     private final static String GET_ELEMENT_LIST_PATH = "/api/job/get_elementlist";
     private final static String GET_LIST_OF_ELEMENT_LISTS_PATH = "/api/job/list_elementlists";
+    private final static String AGGREGATE_STATISTICS_PATH = "/api/job/aggregate_statistics";
 
     public Actions() {}
 
@@ -328,6 +329,34 @@ public class Actions {
     /* Returns a list of elements lists */
     public ArrayList<ElementListVersion> getListOfElementLists(Guid apiToken, Guid jobId) throws IOException, WebException {
         return this.getJobResponse(apiToken, jobId, GET_LIST_OF_ELEMENT_LISTS_PATH, Utils.listELType);
+    }
+
+    public HashMap<String, Object> aggregateStatistics(Guid apiToken,
+                                                         ArrayList<String> metrics,
+                                                         String groupBy,
+                                                         LocalDateTime startDate,
+                                                         LocalDateTime endDate,
+                                                         String accountId) throws IOException, WebException {
+        Hashtable<String, String> queryHashtable = this.initAccessReqDict(apiToken);
+        if (metrics != null) {
+            queryHashtable.put("metrics", Utils.getCustomGson().toJson(metrics));
+        }
+        if (groupBy != null) {
+            queryHashtable.put("group_by", groupBy);
+        }
+        if (startDate != null) {
+            queryHashtable.put("start_date", startDate.toString());
+        }
+        if (endDate != null) {
+            queryHashtable.put("end_date", endDate.toString());
+        }
+        if (accountId != null) {
+            queryHashtable.put("account_id", accountId);
+        }
+
+        URL requestURL = Utils.buildURL(serverUrl, AGGREGATE_STATISTICS_PATH, queryHashtable);
+        String serverResponse = web.httpRequest(requestURL, HttpMethod.GET, WebUtils.BASIC_TIMEOUT);
+        return Utils.deserialize(serverResponse, Utils.hashMapObjectType);
     }
 
     ///////////////////////////

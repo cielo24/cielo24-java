@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 import cielo24.options.JobListOptions;
@@ -210,5 +212,12 @@ public class JobTest extends ActionsTest {
         File sampleVideoFile = new File(this.config.sampleVideoFilePath);
         this.taskId = this.actions.addMediaToJob(this.apiToken, this.jobId, sampleVideoFile);
         assertEquals(32, this.taskId.toString().length());
+    }
+
+    @Test
+    public void testAggregateStatistics() throws IOException, WebException {
+        ArrayList<String> metrics = new ArrayList<String>(Arrays.asList(new String[] {"billable_minutes_total", "billable_minutes_professional"}));
+        HashMap<String, Object> response = this.actions.aggregateStatistics(this.apiToken, metrics, "month",
+                LocalDateTime.of(2015, 6, 25, 0, 0, 0), LocalDateTime.of(2015, 7, 25, 0, 0, 0), "*");
     }
 }
