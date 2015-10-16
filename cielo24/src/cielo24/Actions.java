@@ -128,11 +128,12 @@ public class Actions {
     }
 
     /* Returns a new Secure API key */
-    public Guid generateAPIKey(Guid apiToken, String username, boolean forceNew) throws IOException, WebException {
-        this.assertArgument(username, "Username");
-
+    public Guid generateAPIKey(Guid apiToken, String subAccount, boolean forceNew) throws IOException, WebException {
         Hashtable<String, String> queryHashtable = this.initAccessReqDict(apiToken);
-        queryHashtable.put("account_id", username);
+        if (subAccount != null) {
+            // account_id parameter named subAccount for clarity
+            queryHashtable.put("account_id", subAccount);
+        }
         queryHashtable.put("force_new", Boolean.toString(forceNew));
 
         URL requestURL = Utils.buildURL(serverUrl, GENERATE_API_KEY_PATH, queryHashtable);
@@ -336,7 +337,7 @@ public class Actions {
                                                          String groupBy,
                                                          LocalDateTime startDate,
                                                          LocalDateTime endDate,
-                                                         String accountId) throws IOException, WebException {
+                                                         String subAccount) throws IOException, WebException {
         Hashtable<String, String> queryHashtable = this.initAccessReqDict(apiToken);
         if (metrics != null) {
             queryHashtable.put("metrics", Utils.getCustomGson().toJson(metrics));
@@ -350,8 +351,9 @@ public class Actions {
         if (endDate != null) {
             queryHashtable.put("end_date", endDate.toString());
         }
-        if (accountId != null) {
-            queryHashtable.put("account_id", accountId);
+        if (subAccount != null) {
+            // account_id parameter named subAccount for clarity
+            queryHashtable.put("account_id", subAccount);
         }
 
         URL requestURL = Utils.buildURL(serverUrl, AGGREGATE_STATISTICS_PATH, queryHashtable);
