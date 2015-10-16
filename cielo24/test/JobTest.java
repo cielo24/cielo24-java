@@ -11,6 +11,7 @@ import java.util.Hashtable;
 import cielo24.options.JobListOptions;
 import cielo24.options.PerformTranscriptionOptions;
 import cielo24.options.TranscriptOptions;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,10 +32,20 @@ public class JobTest extends ActionsTest {
     protected static String CALLBACK_URI = "http://fake-callback.com/action?api_token=1234&job_id={job_id}";
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws IOException, WebException {
         super.setUp();
         // Always start with a fresh job
         this.jobId = this.actions.createJob(apiToken, JOB_NAME, Language.ENGLISH, EXTERNAL_ID, null).jobId;
+    }
+
+    @After
+    public void tearDown() throws IOException, WebException {
+        super.tearDown();
+        try {
+            this.actions.deleteJob(this.apiToken, this.jobId);
+        } catch (Exception e) {
+            // Pass silently
+        }
     }
 
     @Test

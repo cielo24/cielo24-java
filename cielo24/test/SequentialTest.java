@@ -16,7 +16,7 @@ public class SequentialTest extends ActionsTest {
     protected Guid jobId = null;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         // Do nothing - we want to be able to control when we login/logout etc.
     }
 
