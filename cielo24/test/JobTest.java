@@ -3,10 +3,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.*;
 
 import cielo24.options.JobListOptions;
 import cielo24.options.PerformTranscriptionOptions;
@@ -230,5 +227,8 @@ public class JobTest extends ActionsTest {
         ArrayList<String> metrics = new ArrayList<String>(Arrays.asList(new String[] {"billable_minutes_total", "billable_minutes_professional"}));
         HashMap<String, Object> response = this.actions.aggregateStatistics(this.apiToken, metrics, "month",
                 LocalDateTime.of(2015, 6, 25, 0, 0, 0), LocalDateTime.of(2015, 7, 25, 0, 0, 0), "*");
+        assertEquals(((List)response.get("data")).size(), 2);
+        assertTrue(((Map)((List)response.get("data")).get(0)).containsKey("billable_minutes_total"));
+        assertTrue(((Map)((List)response.get("data")).get(0)).containsKey("billable_minutes_professional"));
     }
 }
