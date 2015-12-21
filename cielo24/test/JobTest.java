@@ -3,12 +3,12 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.*;
 
 import cielo24.options.JobListOptions;
 import cielo24.options.PerformTranscriptionOptions;
 import cielo24.options.TranscriptOptions;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,10 +29,20 @@ public class JobTest extends ActionsTest {
     protected static String CALLBACK_URI = "http://fake-callback.com/action?api_token=1234&job_id={job_id}";
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws IOException, WebException {
         super.setUp();
         // Always start with a fresh job
         this.jobId = this.actions.createJob(apiToken, JOB_NAME, Language.ENGLISH, EXTERNAL_ID, null).jobId;
+    }
+
+    @After
+    public void tearDown() throws IOException, WebException {
+        super.tearDown();
+        try {
+            this.actions.deleteJob(this.apiToken, this.jobId);
+        } catch (Exception e) {
+            // Pass silently
+        }
     }
 
     @Test
@@ -210,5 +220,15 @@ public class JobTest extends ActionsTest {
         File sampleVideoFile = new File(this.config.sampleVideoFilePath);
         this.taskId = this.actions.addMediaToJob(this.apiToken, this.jobId, sampleVideoFile);
         assertEquals(32, this.taskId.toString().length());
+    }
+
+    @Test
+    public void testAggregateStatistics() throws IOException, WebException {
+        ArrayList<String> metrics = new ArrayList<String>(Arrays.asList(new String[] {"billable_minutes_total", "billable_minutes_professional"}));
+        HashMap<String, Object> response = this.actions.aggregateStatistics(this.apiToken, metrics, "month",
+                LocalDateTime.of(2015, 6, 25, 0, 0, 0), LocalDateTime.of(2015, 7, 25, 0, 0, 0), "*");
+        assertEquals(((List)response.get("data")).size(), 2);
+        assertTrue(((Map)((List)response.get("data")).get(0)).containsKey("billable_minutes_total"));
+        assertTrue(((Map)((List)response.get("data")).get(0)).containsKey("billable_minutes_professional"));
     }
 }
