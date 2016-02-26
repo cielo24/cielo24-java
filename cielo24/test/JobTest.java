@@ -86,6 +86,11 @@ public class JobTest extends ActionsTest {
     }
 
     @Test
+    public void testModifyJob() throws IOException, WebException {
+        this.actions.modifyJob(this.apiToken, this.jobId, Fidelity.PROFESSIONAL, 36, Priority.ECONOMY);
+    }
+
+    @Test
     public void testDeleteJob() throws IOException, WebException {
         this.taskId = this.actions.deleteJob(this.apiToken, this.jobId);
         assertEquals(32, this.taskId.toString().length());
