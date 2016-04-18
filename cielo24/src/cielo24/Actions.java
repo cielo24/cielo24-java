@@ -36,6 +36,7 @@ public class Actions {
     private final static String REMOVE_API_KEY_PATH = "/api/account/remove_api_key";
     private final static String CREATE_JOB_PATH = "/api/job/new";
     private final static String AUTHORIZE_JOB_PATH = "/api/job/authorize";
+    private final static String MODIFY_JOB_PATH = "/api/job/modify";
     private final static String DELETE_JOB_PATH = "/api/job/del";
     private final static String GET_JOB_INFO_PATH = "/api/job/info";
     private final static String GET_JOB_LIST_PATH = "/api/job/list";
@@ -183,6 +184,23 @@ public class Actions {
         Hashtable<String, String> queryHashtable = this.initJobReqDict(apiToken, jobId);
         URL requestURL = Utils.buildURL(serverUrl, AUTHORIZE_JOB_PATH, queryHashtable);
         web.httpRequest(requestURL, HttpMethod.GET, WebUtils.BASIC_TIMEOUT); // Nothing returned
+    }
+
+    /* Modify job parameters */
+    public void modifyJob(Guid apiToken, Guid jobId, Fidelity fidelity, Integer turnaround_hours, Priority priority)
+            throws IOException, WebException {
+        Hashtable<String, String> queryHashtable = this.initJobReqDict(apiToken, jobId);
+        if (fidelity != null) {
+            queryHashtable.put("transcription_fidelity", fidelity.toString());
+        }
+        if (priority != null) {
+            queryHashtable.put("priority", priority.toString());
+        }
+        if (turnaround_hours != null) {
+            queryHashtable.put("turnaround_hours", turnaround_hours.toString());
+        }
+        URL requestURL = Utils.buildURL(serverUrl, MODIFY_JOB_PATH, queryHashtable);
+        web.httpRequest(requestURL, HttpMethod.POST, WebUtils.BASIC_TIMEOUT);
     }
 
     /* Deletes a job with jobId */

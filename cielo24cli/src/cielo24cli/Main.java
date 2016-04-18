@@ -99,6 +99,11 @@ public class Main {
 			System.out.println("Authorizing job...");
 			actions.authorizeJob(options.apiToken, options.jobId);
 			return "Job Authorized Successfully";
+		} else if (actionName.equals("modify_job")) {
+			System.out.println("Modifying job parameters...");
+			actions.modifyJob(options.apiToken, options.jobId, options.fidelity,
+					options.turnaroundHours, options.priority);
+			System.out.println("Job modified successfully");
 		} else if(actionName.equals("delete")) {
 			System.out.println("Deleting job...");
 			return actions.deleteJob(options.apiToken, options.jobId);
