@@ -1,7 +1,8 @@
 package cielo24;
 
 import java.io.*;
-import java.net.HttpURLConnection;
+//import java.net.HttpURLConnection;
+import java.net.HttpsURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -28,11 +29,11 @@ public class WebUtils {
             throws IOException, WebException {
         log(url);
 
-        HttpURLConnection connection = null;
-
+//        HttpURLConnection connection = null;
+        HttpsURLConnection connection = null;
         try {
-            connection = (HttpURLConnection) url.openConnection();
-
+//            connection = (HttpURLConnection) url.openConnection();
+            connection = (HttpsURLConnection) url.openConnection();
             if (headers != null) {
                 for (String key : headers.keySet()) {
                     connection.setRequestProperty(key, headers.get(key));
@@ -70,10 +71,11 @@ public class WebUtils {
             throws IOException, WebException {
         log(url);
 
-        HttpURLConnection connection = null;
-
+//        HttpURLConnection connection = null;
+        HttpsURLConnection connection = null;
         try {
-            connection = (HttpURLConnection) url.openConnection();
+//            connection = (HttpURLConnection) url.openConnection();
+            connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod(HttpMethod.POST.toString());
             connection.setRequestProperty("Content-Type", contentType);
             connection.setRequestProperty("Content-Length", Long.toString(length));
@@ -107,7 +109,8 @@ public class WebUtils {
     }
 
     /* Helper method */
-    private String readResponse(HttpURLConnection connection) throws IOException, WebException {
+//    private String readResponse(HttpURLConnection connection) throws IOException, WebException {
+    private String readResponse(HttpsURLConnection connection) throws IOException, WebException {
         int responseCode = connection.getResponseCode();
         if (responseCode == 200 || responseCode == 204) {
             InputStream inputStream = null;
