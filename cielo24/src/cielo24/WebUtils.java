@@ -2,7 +2,7 @@ package cielo24;
 
 import java.io.*;
 //import java.net.HttpURLConnection;
-import java.net.HttpsURLConnection;
+import javax.net.ssl.HttpsURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Hashtable;
