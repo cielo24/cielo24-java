@@ -12,7 +12,7 @@ All URIs are relative to *https://api.cielo24.com/api*
 
 <a name="getSettings"></a>
 # **getSettings**
-> getSettings(v)
+> Object getSettings(v)
 
 
 
@@ -21,12 +21,12 @@ Get Account Settings
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.AccountApi;
+import com.ApiClient;
+import com.ApiException;
+import com.Configuration;
+import com.auth.*;
+import com.models.*;
+import com.cielo24.AccountApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -42,7 +42,8 @@ public class Example {
     AccountApi apiInstance = new AccountApi(defaultClient);
     Integer v = 1; // Integer | 
     try {
-      apiInstance.getSettings(v);
+      Object result = apiInstance.getSettings(v);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountApi#getSettings");
       System.err.println("Status code: " + e.getCode());
@@ -62,7 +63,7 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -71,7 +72,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -89,11 +90,11 @@ Login to the cielo24 API to obtain an API access token for use when calling othe
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.AccountApi;
+import com.ApiClient;
+import com.ApiException;
+import com.Configuration;
+import com.models.*;
+import com.cielo24.AccountApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -154,12 +155,12 @@ Logout of the current session, invalidating the API token.
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.AccountApi;
+import com.ApiClient;
+import com.ApiException;
+import com.Configuration;
+import com.auth.*;
+import com.models.*;
+import com.cielo24.AccountApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -223,12 +224,12 @@ Test Auth
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.AccountApi;
+import com.ApiClient;
+import com.ApiException;
+import com.Configuration;
+import com.auth.*;
+import com.models.*;
+import com.cielo24.AccountApi;
 
 public class Example {
   public static void main(String[] args) {

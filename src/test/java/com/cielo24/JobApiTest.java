@@ -11,9 +11,9 @@
  */
 
 
-package org.openapitools.client.api;
+package com.cielo24;
 
-import org.openapitools.client.ApiException;
+import com.ApiException;
 import org.openapitools.client.model.AddMediaResponse;
 import org.openapitools.client.model.ErrorResponse;
 import java.io.File;

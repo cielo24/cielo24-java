@@ -6,7 +6,7 @@
         {
             "label": "Build",
             "type": "shell",
-            "command": "openapi-generator generate --package-name=cielo24 -g java -i ../cielo24-openapi/cielo24.yml",
+            "command": "openapi-generator generate -g java -c openapi_config.yml",
             "problemMatcher": [],
             "group": {
                 "kind": "build",

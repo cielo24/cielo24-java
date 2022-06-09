@@ -11,10 +11,10 @@
  */
 
 
-package org.openapitools.client.auth;
+package com.auth;
 
-import org.openapitools.client.Pair;
-import org.openapitools.client.ApiException;
+import com.Pair;
+import com.ApiException;
 
 import java.net.URI;
 import java.util.Map;

@@ -1,8 +1,8 @@
-# openapi-java-client
+# cielo24
 
 Cielo24
 - API version: 1.0.0
-  - Build date: 2022-06-09T10:34:09.175-03:00[America/Sao_Paulo]
+  - Build date: 2022-06-09T12:06:07.546-03:00[America/Sao_Paulo]
 
 The cielo24 Web Services Platform API allows developers to easily integrate transcription, captioning and keyword extraction into their applications without having to use a manual web portal.
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 ```xml
 <dependency>
   <groupId>org.openapitools</groupId>
-  <artifactId>openapi-java-client</artifactId>
+  <artifactId>cielo24</artifactId>
   <version>1.0.0</version>
   <scope>compile</scope>
 </dependency>
@@ -51,12 +51,12 @@ Add this dependency to your project's build file:
 
 ```groovy
   repositories {
-    mavenCentral()     // Needed if the 'openapi-java-client' jar has been published to maven central.
-    mavenLocal()       // Needed if the 'openapi-java-client' jar has been published to the local maven repo.
+    mavenCentral()     // Needed if the 'cielo24' jar has been published to maven central.
+    mavenLocal()       // Needed if the 'cielo24' jar has been published to the local maven repo.
   }
 
   dependencies {
-     implementation "org.openapitools:openapi-java-client:1.0.0"
+     implementation "org.openapitools:cielo24:1.0.0"
   }
 ```
 
@@ -70,7 +70,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/openapi-java-client-1.0.0.jar`
+* `target/cielo24-1.0.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -80,12 +80,12 @@ Please follow the [installation](#installation) instruction and execute the foll
 ```java
 
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.AccountApi;
+import com.ApiClient;
+import com.ApiException;
+import com.Configuration;
+import com.auth.*;
+import com.models.*;
+import com.cielo24.AccountApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -101,7 +101,8 @@ public class Example {
     AccountApi apiInstance = new AccountApi(defaultClient);
     Integer v = 1; // Integer | 
     try {
-      apiInstance.getSettings(v);
+      Object result = apiInstance.getSettings(v);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountApi#getSettings");
       System.err.println("Status code: " + e.getCode());

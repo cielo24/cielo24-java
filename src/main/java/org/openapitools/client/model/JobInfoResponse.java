@@ -44,12 +44,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.openapitools.client.JSON;
+import com.JSON;
 
 /**
  * JobInfoResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-09T10:34:09.175-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-09T12:06:07.546-03:00[America/Sao_Paulo]")
 public class JobInfoResponse {
   public static final String SERIALIZED_NAME_JOB_ID = "JobId";
   @SerializedName(SERIALIZED_NAME_JOB_ID)

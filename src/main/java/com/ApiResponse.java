@@ -11,7 +11,7 @@
  */
 
 
-package org.openapitools.client;
+package com;
 
 import java.util.List;
 import java.util.Map;

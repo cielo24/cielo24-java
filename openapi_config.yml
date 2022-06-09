@@ -1,0 +1,10 @@
+apiPackage: com.cielo24
+packageVersion: 1.0.0
+projectName: cielo24
+gitHost: github.com
+gitUserId: cielo24
+gitRepoId: cielo24-java
+inputSpec: ../cielo24-openapi/cielo24.yml
+artifactDescription: Cielo24 Java Client
+artifactId: cielo24
+artifactUrl: https://github.com/cielo24/cielo24-java

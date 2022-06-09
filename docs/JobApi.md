@@ -25,12 +25,12 @@ Add a piece of media to an existing job using a local file. No content-type shou
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.JobApi;
+import com.ApiClient;
+import com.ApiException;
+import com.Configuration;
+import com.auth.*;
+import com.models.*;
+import com.cielo24.JobApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -103,12 +103,12 @@ Add a piece of media to an existing job using a public media url. A job may only
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.JobApi;
+import com.ApiClient;
+import com.ApiException;
+import com.Configuration;
+import com.auth.*;
+import com.models.*;
+import com.cielo24.JobApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -179,12 +179,12 @@ Authorize an existing job. If your account has the \&quot;customer authorization
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.JobApi;
+import com.ApiClient;
+import com.ApiException;
+import com.Configuration;
+import com.auth.*;
+import com.models.*;
+import com.cielo24.JobApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -250,12 +250,12 @@ Get the caption file for a job. The job must have completed transcription before
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.JobApi;
+import com.ApiClient;
+import com.ApiException;
+import com.Configuration;
+import com.auth.*;
+import com.models.*;
+import com.cielo24.JobApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -402,12 +402,12 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.JobApi;
+import com.ApiClient;
+import com.ApiException;
+import com.Configuration;
+import com.auth.*;
+import com.models.*;
+import com.cielo24.JobApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -474,12 +474,12 @@ Create a new job. A job is a container into which you can upload media and reque
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.JobApi;
+import com.ApiClient;
+import com.ApiException;
+import com.Configuration;
+import com.auth.*;
+import com.models.*;
+import com.cielo24.JobApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -546,12 +546,12 @@ Request that transcription be performed on the specified job. A callback URL, if
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.JobApi;
+import com.ApiClient;
+import com.ApiException;
+import com.Configuration;
+import com.auth.*;
+import com.models.*;
+import com.cielo24.JobApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -618,12 +618,12 @@ Request that orders a new Translation language for a video that has been previou
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.JobApi;
+import com.ApiClient;
+import com.ApiException;
+import com.Configuration;
+import com.auth.*;
+import com.models.*;
+import com.cielo24.JobApi;
 
 public class Example {
   public static void main(String[] args) {

@@ -11,7 +11,7 @@
  */
 
 
-package org.openapitools.client;
+package com;
 
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;

@@ -11,16 +11,16 @@
  */
 
 
-package org.openapitools.client.auth;
+package com.auth;
 
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Pair;
+import com.ApiException;
+import com.Pair;
 
 import java.net.URI;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-09T10:34:09.175-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-09T12:06:07.546-03:00[America/Sao_Paulo]")
 public class HttpBearerAuth implements Authentication {
   private final String scheme;
   private String bearerToken;

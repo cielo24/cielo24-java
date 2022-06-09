@@ -11,9 +11,9 @@
  */
 
 
-package org.openapitools.client.api;
+package com.cielo24;
 
-import org.openapitools.client.ApiException;
+import com.ApiException;
 import org.openapitools.client.model.ErrorResponse;
 import org.openapitools.client.model.LoginBody;
 import org.openapitools.client.model.LoginResponse;
@@ -42,7 +42,7 @@ public class AccountApiTest {
     @Test
     public void getSettingsTest() throws ApiException {
         Integer v = null;
-        api.getSettings(v);
+        Object response = api.getSettings(v);
         // TODO: test validations
     }
 

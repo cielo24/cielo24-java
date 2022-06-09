@@ -102,6 +102,10 @@ paths:
         style: form
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                type: object
           description: Test
       tags:
       - account

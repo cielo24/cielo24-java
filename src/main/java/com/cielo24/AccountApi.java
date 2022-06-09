@@ -11,16 +11,16 @@
  */
 
 
-package org.openapitools.client.api;
+package com.cielo24;
 
-import org.openapitools.client.ApiCallback;
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.ApiResponse;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.Pair;
-import org.openapitools.client.ProgressRequestBody;
-import org.openapitools.client.ProgressResponseBody;
+import com.ApiCallback;
+import com.ApiClient;
+import com.ApiException;
+import com.ApiResponse;
+import com.Configuration;
+import com.Pair;
+import com.ProgressRequestBody;
+import com.ProgressResponseBody;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -118,7 +118,7 @@ public class AccountApi {
         }
 
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -155,6 +155,7 @@ public class AccountApi {
      * 
      * Get Account Settings
      * @param v  (required)
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -162,15 +163,16 @@ public class AccountApi {
         <tr><td> 200 </td><td> Test </td><td>  -  </td></tr>
      </table>
      */
-    public void getSettings(Integer v) throws ApiException {
-        getSettingsWithHttpInfo(v);
+    public Object getSettings(Integer v) throws ApiException {
+        ApiResponse<Object> localVarResp = getSettingsWithHttpInfo(v);
+        return localVarResp.getData();
     }
 
     /**
      * 
      * Get Account Settings
      * @param v  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -178,9 +180,10 @@ public class AccountApi {
         <tr><td> 200 </td><td> Test </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> getSettingsWithHttpInfo(Integer v) throws ApiException {
+    public ApiResponse<Object> getSettingsWithHttpInfo(Integer v) throws ApiException {
         okhttp3.Call localVarCall = getSettingsValidateBeforeCall(v, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -196,10 +199,11 @@ public class AccountApi {
         <tr><td> 200 </td><td> Test </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getSettingsAsync(Integer v, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call getSettingsAsync(Integer v, final ApiCallback<Object> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getSettingsValidateBeforeCall(v, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
