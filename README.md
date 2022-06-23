@@ -2,7 +2,7 @@
 
 Cielo24
 - API version: 1.0.0
-  - Build date: 2022-06-09T12:06:07.546-03:00[America/Sao_Paulo]
+  - Build date: 2022-06-23T14:23:37.760-03:00[America/Sao_Paulo]
 
 The cielo24 Web Services Platform API allows developers to easily integrate transcription, captioning and keyword extraction into their applications without having to use a manual web portal.
 
@@ -132,7 +132,7 @@ Class | Method | HTTP request | Description
 *JobApi* | [**jobInfo**](docs/JobApi.md#jobInfo) | **GET** /job/info | 
 *JobApi* | [**newJob**](docs/JobApi.md#newJob) | **POST** /job/new | 
 *JobApi* | [**performTranscription**](docs/JobApi.md#performTranscription) | **POST** /job/perform_transcription | 
-*JobApi* | [**performTranslation**](docs/JobApi.md#performTranslation) | **POST** /job/perform_translation | 
+*JobApi* | [**performTranslation**](docs/JobApi.md#performTranslation) | **POST** /job/translate | 
 
 
 ## Documentation for Models

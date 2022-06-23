@@ -11,7 +11,7 @@ All URIs are relative to *https://api.cielo24.com/api*
 | [**jobInfo**](JobApi.md#jobInfo) | **GET** /job/info |  |
 | [**newJob**](JobApi.md#newJob) | **POST** /job/new |  |
 | [**performTranscription**](JobApi.md#performTranscription) | **POST** /job/perform_transcription |  |
-| [**performTranslation**](JobApi.md#performTranslation) | **POST** /job/perform_translation |  |
+| [**performTranslation**](JobApi.md#performTranslation) | **POST** /job/translate |  |
 
 
 <a name="addMediaFile"></a>

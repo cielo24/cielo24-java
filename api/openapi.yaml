@@ -336,7 +336,7 @@ paths:
       - job
       x-content-type: application/json
       x-accepts: application/json
-  /job/perform_translation:
+  /job/translate:
     post:
       description: Request that orders a new Translation language for a video that
         has been previously Transcribed and/or Translated. The New Job ID and job
@@ -1387,6 +1387,7 @@ components:
           - MECHANICAL
           - PREMIUM
           - PROFESSIONAL
+          - HIGH
           example: PREMIUM
           type: string
         JobStatus:

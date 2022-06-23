@@ -1515,7 +1515,7 @@ public class JobApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/job/perform_translation";
+        String localVarPath = "/job/translate";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();

@@ -51,7 +51,7 @@ import com.JSON;
 /**
  * JobOptions
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-09T12:06:07.546-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-23T14:23:37.762-03:00[America/Sao_Paulo]")
 public class JobOptions {
   /**
    * Gets or Sets customerApprovalSteps

@@ -44,6 +44,7 @@
 | MECHANICAL | &quot;MECHANICAL&quot; |
 | PREMIUM | &quot;PREMIUM&quot; |
 | PROFESSIONAL | &quot;PROFESSIONAL&quot; |
+| HIGH | &quot;HIGH&quot; |
 
 
 
